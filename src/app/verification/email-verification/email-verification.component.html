@@ -1,0 +1,23 @@
+<div class="email-verification container">
+    <div class="row">
+      <div class="col-md-12 col-12 text-center">
+        <span class="fa {{isError ? 'fa-exclamation-triangle' : 'fa-check'}}"></span>
+      </div>
+    </div>
+    <div *ngIf="isVerified && !isError" class="row">
+      <div class="col-md-12 col-12">
+        <div class="login" *ngIf="!isLoggedIn">Sua conta foi verificada com sucesso! Por favor faça <a routerLink="/login">login.</a></div>
+        <a class="btn home" routerLink="/">Homepage</a>
+        <a class="btn books" routerLink="/account/browse">Books</a>
+      </div>
+    </div>
+  
+    <div *ngIf="!isVerified && !isError" class="row">
+      <p>Enviando solicitação...</p>
+    </div>
+  
+    <div *ngIf="isError" class="row">
+      <p>Não é possível ativar sua conta no momento. Entre em contato com nossa equipe de suporte.</p>
+    </div>
+  </div>
+  

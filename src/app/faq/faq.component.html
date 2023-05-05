@@ -1,0 +1,27 @@
+<div class="container faq">
+    <div class="title">
+      <p>Perguntas Frequentes</p>
+    </div>
+    <hr>
+    <div class="accordion">
+      <ngb-accordion #acc="ngbAccordion" [closeOthers]="false" [destroyOnHide]="true">
+        <ngb-panel id="static-1">
+          <ng-template ngbPanelTitle>
+            <span class="panel-title">O que é Pandora Livos?</span>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            Somos um comercio eletrônico de venda de Livros.
+          </ng-template>
+        </ngb-panel>
+        <ngb-panel id="static-2">
+          <ng-template ngbPanelTitle>
+            <span class="panel-title w-100">Como posso entrar em contato com vocês?</span>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            Se você quiser entrar em contato conosco, pode nos enviar um email para lianakdelima@gmail.com
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+  </div>
+  
