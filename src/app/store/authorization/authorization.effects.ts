@@ -113,7 +113,6 @@ export class AuthEffects {
       return this.tokenService
         .obtainAccessToken(credentials.email, credentials.password)
         .pipe(
-          tap((res) => console.log('Resposta do obtainAccessToken:', res)),
           switchMap((res) => {
             this.tokenService.saveToken(res);
             this.router.navigate(['/']);

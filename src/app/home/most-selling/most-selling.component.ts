@@ -35,10 +35,10 @@ export class MostSellingComponent implements OnInit {
   }
 
   scrollLeft() {
-    this.mostCards.nativeElement.scrollLeft -= 250;
+    this.mostCards.nativeElement.scrollLeft -= 325;
   }
 
   scrollRight() {
-    this.mostCards.nativeElement.scrollLeft += 250;
+    this.mostCards.nativeElement.scrollLeft += 325;
   }
 }

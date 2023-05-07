@@ -4,13 +4,15 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FaqComponent } from './faq.component';
 import { FaqRoutes } from './faq.routes';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(FaqRoutes),
-    NgbModule
+    NgbModule,
+    AccordionModule.forRoot()
   ],
   declarations: [FaqComponent]
 })

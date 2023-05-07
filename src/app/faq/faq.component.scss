@@ -4,33 +4,50 @@
   position: relative;
   top: 150px;
   min-height: 50vh;
+}
 
-  .title {
-    p {
-      margin: 0;
-      font-weight: bold;
-      color: black;
-    }
-  }
+.faq .title p {
+  margin: 0;
+  font-weight: bold;
+  color: black;
+}
 
-  ngb-accordion ::ng-deep .btn {
-    text-decoration: none !important;
-  }
+.faq .card {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+  
+.faq .card-header {
+  padding: 10px 15px;
+  background-color: #f7f7f7;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  background-color: #f4ea39;
+  opacity: 90%;
+}
 
-  ngb-accordion ::ng-deep .panel-title {
-    color: white;
-    font-size: 18px;
-    font-weight: 400;
-    outline: none;
-    text-decoration: none;
-  }
 
-  ngb-accordion ::ng-deep .panel-title:focus,
-  ngb-accordion ::ng-deep .panel-title:hover {
-    text-decoration: none;
-  }
 
-  ngb-accordion ::ng-deep .card-header {
-    background-color: #f4ea39 !important;
-  }
+.faq .card-header button {
+  display: none;
+}
+
+.faq .card-header h5 {
+  color: #333;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: left;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.faq .card-header h5:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.faq .card-body {
+  padding: 15px;
 }

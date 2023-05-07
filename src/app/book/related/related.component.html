@@ -13,7 +13,7 @@
           <p class="book-title">{{r.title}}</p>
           <div class="row">
             <div class="col-md-6">
-              <p>{{r.unitPrice}} R$</p>
+              <p>R$ {{r.unitPrice}}</p>
             </div>
           </div>
         </a>
@@ -21,4 +21,3 @@
     </div>
     <div *ngIf="!innerLoading" class="scroll-right" (click)="scrollRight()"></div>
   </div>
-  

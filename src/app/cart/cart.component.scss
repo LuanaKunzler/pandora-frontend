@@ -108,7 +108,7 @@
           position: relative;
           top: 40%;
           font-size: 14px;
-          color: #f4ea39;
+          color: #333;
           font-weight: bold;
         }
       }
@@ -157,7 +157,7 @@
       .discount-add-text,
       .discount-add-text span {
         cursor: pointer;
-        color: #f4ea39;
+        color: #333;
         font-size: 14px;
         span {
           font-size: 18px;
@@ -166,7 +166,7 @@
         }
       }
       .discount-text {
-        color: #f4ea39;
+        color: #333;
       }
     }
 
@@ -184,8 +184,7 @@
     .checkout {
       button {
         width: 100%;
-        background-color: #f4ea39;
-        color: white;
+        height: 65%;
         border-radius: 10px;
       }
 
@@ -201,10 +200,17 @@
       }
 
       .apply-code {
-        background-color: white;
-        color: #f4ea39;
-        border: 1px solid #f4ea39;
+        color:#333;
+        width: 80%;
+        height: 100%;
         border-radius: 10px;
+      }
+
+      .alert-danger {
+        position: relative;
+        color: #721c24;
+        background-color: #f8d7da;
+        border-color: #f5c6cb;
       }
     }
   }

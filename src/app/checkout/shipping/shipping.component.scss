@@ -12,6 +12,7 @@
 
     input,
     textarea {
+      margin-bottom: 10px;
       border-radius: 10px;
     }
 
@@ -66,9 +67,9 @@
       border-radius: 10px;
     }
 
-    .back {
-      border: 1px solid #f4ea39;
-      color: #f4ea39;
+    .back, .next {
+      margin-top: 20px;
+      color: #333;
       font-weight: bold;
     }
   }

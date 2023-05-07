@@ -15,6 +15,8 @@ export class AddressComponent implements OnInit {
 
   addressForm: FormGroup | any;
   innerLoading = true;
+  errorAlertVisible = false;
+  successAlertVisible = false;
 
   constructor(private accountService: AccountService, private tokenService: TokenService) {
   }
@@ -24,7 +26,7 @@ export class AddressComponent implements OnInit {
       address: new FormControl(null, [Validators.pattern('[0-9a-zA-Z #,-]+'), BlankValidators.checkIfBlankValidator, Validators.minLength(3), Validators.maxLength(240)]),
       city: new FormControl(null, [Validators.pattern('^[a-zA-Z\\s]+$'), BlankValidators.checkIfBlankValidator, Validators.minLength(3), Validators.maxLength(100)]),
       state: new FormControl(null, [Validators.pattern('^[a-zA-Z\\s]+$'), BlankValidators.checkIfBlankValidator, Validators.minLength(3), Validators.maxLength(40)]),
-      zip: new FormControl(null, [Validators.pattern('^[0-9]*$'), BlankValidators.checkIfBlankValidator, Validators.maxLength(6), Validators.minLength(5)]),
+      zip: new FormControl(null, [Validators.pattern('^[0-9]*$'), BlankValidators.checkIfBlankValidator, Validators.maxLength(8), Validators.minLength(5)]),
       country: new FormControl(null, [Validators.pattern('^[a-zA-Z\\s]+$'), BlankValidators.checkIfBlankValidator, Validators.minLength(3), Validators.maxLength(40)])
     });
 
@@ -56,13 +58,13 @@ export class AddressComponent implements OnInit {
     this.accountService.updateUserAddress(user)
       .pipe(take(1), catchError(
         error => {
-          alert('An error occurred. Please refresh your page.');
-          return throwError(error);
+          this.errorAlertVisible = true;
+          return throwError(() => new Error(error));
         }
       ))
       .subscribe(data => {
         this.innerLoading = false;
-        alert('Success! Your address has been changed.');
+        this.successAlertVisible = true;
       });
 
   }

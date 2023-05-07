@@ -44,9 +44,6 @@ export class AccountService {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    console.log(token);
-    console.log(googleRegisterUserRequest);        
-
     const request = {
       email: googleRegisterUserRequest.email,
       firstName: googleRegisterUserRequest.firstName,

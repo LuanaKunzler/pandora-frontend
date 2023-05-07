@@ -4,7 +4,15 @@
     </div>
     <hr>
     <div *ngIf="innerLoading" class="loader"></div>
-  
+    <ngb-toast [class]="'bg-danger text-light'" *ngIf="errorAlertVisible" [autohide]="true" [delay]="5000" (hidden)="errorAlertVisible = false">
+      Um erro ocorreu. Atualize sua página.
+      <button type="button" class="btn-close" aria-label="Fechar" (click)="errorAlertVisible = false"></button>
+    </ngb-toast>
+    
+    <ngb-toast [class]="'bg-success text-light'" *ngIf="successAlertVisible" [autohide]="true" [delay]="5000" (hidden)="successAlertVisible = false">      
+      Seu perfil foi atualizado com sucesso!
+      <button type="button" class="btn-close" aria-label="Fechar" (click)="successAlertVisible = false"></button>
+    </ngb-toast> 
     <div *ngIf="!innerLoading">
       <form [formGroup]="detailsForm" (ngSubmit)="onSubmitDetailsForm()">
         <div class="info row">
@@ -49,7 +57,7 @@
         <div class="row controls">
           <div class="col-md-12">
             <button class="btn btn-info" type="submit" [disabled]="detailsForm.invalid || detailsForm.pending">
-              Atualizar
+              <p>Atualizar</p>
             </button>
           </div>
   

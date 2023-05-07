@@ -5,13 +5,13 @@ import { VerificationRoutes } from './verification.routes';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { PasswordForgotVerificationComponent } from './password-forgot-verification/password-forgot-verification.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(VerificationRoutes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   declarations: [EmailVerificationComponent, PasswordForgotVerificationComponent]
 })

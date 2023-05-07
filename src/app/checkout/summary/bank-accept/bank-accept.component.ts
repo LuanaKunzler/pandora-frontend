@@ -57,7 +57,7 @@ export class BankAcceptComponent implements OnInit {
   paymentConfirm() {
     this.cartService.confirmCart(this.postCart).pipe(take(1), catchError(
       error => {
-        alert('An error occurred. Operation cancelled. Please try again.');
+        alert('Ocorreu um erro. Operação cancelada! Tente novamente mais tarde');
         if (error.status === 400) {
           this.store.dispatch(new CartActions.FetchCart());
         }

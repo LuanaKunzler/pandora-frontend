@@ -14,6 +14,7 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit, OnDestroy {
+  public isActivated = false;
 
   cartState: Observable<CartState> = new Observable<CartState>();
   cartItemCountSubscription: Subscription = new Subscription;
@@ -72,7 +73,7 @@ export class CartComponent implements OnInit, OnDestroy {
           this.store.dispatch(new OrderActions.IsCheckoutActive(true));
           this.router.navigate(['/checkout/personal'], { relativeTo: this.route });
         } else {
-          alert('Your account is inactive. You must activate your account in order to purchase.\nPlease check your email.');
+          this.isActivated = true;
         }
       });
   }

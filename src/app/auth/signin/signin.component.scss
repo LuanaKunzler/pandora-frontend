@@ -105,32 +105,53 @@
         }
       }
     }
+
+    .google-button {
+      background-color: #fff;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px 0 rgba(0,0,0,.25);
+      color: #666;
+      font-family: 'Roboto', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      height: 36px;
+      line-height: 36px;
+      padding: 0 16px;
+      position: relative;
+      transition: box-shadow 0.2s ease;
+    }
+    
+    .google-icon {
+      background-image: url('https://developers.google.com/identity/images/g-logo.png');
+      background-size: cover;
+      display: inline-block;
+      height: 18px;
+      margin-right: 16px;
+      position: relative;
+      top: 4px;
+      width: 18px;
+    }
   }
-  .google-button {
-    background-color: #fff;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.25);
-    color: #666;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    height: 36px;
-    line-height: 36px;
-    padding: 0 16px;
-    position: relative;
-    transition: box-shadow 0.2s ease;
+
+  .line-with-text {
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+    text-align: center;
   }
   
-  .google-icon {
-    background-image: url('https://developers.google.com/identity/images/g-logo.png');
-    background-size: cover;
-    display: inline-block;
-    height: 18px;
-    margin-right: 16px;
-    position: relative;
-    top: 4px;
-    width: 18px;
+  .line-with-text hr {
+    flex: 1;
+    border: none;
+    height: 1px;
+    background-color: grey;
+  }
+  
+  .line-with-text span {
+    margin: 0 10px;
+    color: #333;
+    
   }
 }
 

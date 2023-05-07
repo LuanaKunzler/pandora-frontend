@@ -37,7 +37,7 @@
           </div>
   
           <div class="col-md-2 item-price">
-            <span *ngIf="cartItem.unitsInStock >= cartItem.amount">{{cartItem.price}} €</span>
+            <span *ngIf="cartItem.unitsInStock >= cartItem.amount">R$ {{cartItem.price}}</span>
             <span *ngIf="cartItem.unitsInStock < cartItem.amount">Indisponível</span>
           </div>
   
@@ -58,7 +58,7 @@
               <span class="label">Carrinho</span>
             </div>
             <div class="col-md-8 col-8">
-              <span>{{(cartState | async)?.cart?.totalCartPrice?.toFixed(2) | number:'1.2' }} R$</span>
+              <span>R$ {{(cartState | async)?.cart?.totalCartPrice?.toFixed(2) | number:'1.2' }}</span>
             </div>
           </div>
           <div class="row ">
@@ -66,7 +66,7 @@
               <span class="label">Envio</span>
             </div>
             <div class="col-md-8 col-8">
-              <span>{{(cartState | async)?.cart?.totalCargoPrice?.toFixed(2) | number:'1.2' }} R$</span>
+              <span>R$ {{(cartState | async)?.cart?.totalCargoPrice?.toFixed(2) | number:'1.2' }}</span>
             </div>
           </div>
   
@@ -94,24 +94,26 @@
               <span class="label">Total</span>
             </div>
             <div class="col-md-8 col-8">
-              <span>{{(cartState | async)?.cart?.totalPrice?.toFixed(2) | number:'1.2' }} R$</span>
+              <span>R$ {{(cartState | async)?.cart?.totalPrice?.toFixed(2) | number:'1.2' }}</span>
             </div>
           </div>
         </div>
-  
+        <alert type="danger" *ngIf="isActivated">
+          <div>Você deve ativar sua conta para poder comprar! Por favor verifique seu email.</div>
+        </alert>
         <div class="checkout">
           <div class="row">
             <div class="col-md-12">
-              <button class="btn" (click)="activatePurchase()">Checkout</button>
+              <button class="btn btn-info" (click)="activatePurchase()"><p>Checkout</p></button>
             </div>
           </div>
   
           <div class="row" *ngIf="showDiscountInput">
             <div class="col-md-12">
               <div *ngFor="let e of (cartState | async)?.errors">
-                <div *ngIf="e.errorEffect == 'APPLY_DISCOUNT'" class="alert-warning p-2">
-                  <div *ngIf="e.error.status === 404">Código de desconto não encontrado.</div>
-                  <div *ngIf="e.error.status === 400 || e.error.status === 401">Erro 401.</div>
+                <div *ngIf="e.errorEffect == 'APPLY_DISCOUNT'" class="alert-danger p-2">
+                  <div *ngIf="e.error.status === 404">Código de desconto inválido!</div>
+                  <div *ngIf="e.error.status === 400 || e.error.status === 401">Código de desconto expirado!</div>
                   <div *ngIf="e.error.status === 500 || e.error.status === 0">Erro do Servidor Interno! Entre em contato com nossa equipe de suporte.
                   </div>
                 </div>
@@ -130,7 +132,7 @@
                     <input class="form-control" #discountCodeField type="text">
                   </div>
                   <div class="col-md-5">
-                    <button class="btn apply-code" (click)="applyCode(discountCodeField)">Aplicar</button>
+                    <button class="btn btn-secondary apply-code" (click)="applyCode(discountCodeField)">Aplicar</button>
                   </div>
                 </div>
               </div>

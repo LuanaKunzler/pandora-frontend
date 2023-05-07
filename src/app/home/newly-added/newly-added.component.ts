@@ -23,7 +23,7 @@ export class NewlyAddedComponent implements OnInit {
     this.showcaseState
       .pipe(take(1))
       .subscribe(
-        data => {
+        data => {          
           if (data.newlyAdded.length === 0) {
             this.store.dispatch(new ShowcaseActions.FetchNewlyAdded());
           }

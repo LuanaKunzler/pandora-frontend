@@ -4,9 +4,6 @@
     </div>
     <div class="book">
       <div *ngFor="let cartItem of (cartState | async)?.cart?.cartItems" class="row">
-        <div class="col-md-4">
-          <img src="{{cartItem.imageUrl}}" alt="{{cartItem.title}}">
-        </div>
         <div class="col-md-8 details">
           <div class="row">
             <div class="col-md-12">
@@ -18,7 +15,7 @@
               <p class="amount">Quantidade: <span>{{cartItem.amount}}</span></p>
             </div>
             <div class="col-md-6">
-              <p class="price">{{cartItem.price}} R$</p>
+              <p class="price">R$ {{cartItem.price}}</p>
             </div>
           </div>
         </div>
@@ -30,7 +27,7 @@
           <span class="label">Carrinho</span>
         </div>
         <div class="col-md-8 col-8">
-          <span>{{(cartState | async)?.cart?.totalCartPrice?.toFixed(2) | number:'1.2' }} R$</span>
+          <span>R$ {{(cartState | async)?.cart?.totalCartPrice?.toFixed(2) | number:'1.2' }}</span>
         </div>
       </div>
       <div class="row ">
@@ -38,7 +35,7 @@
           <span class="label">Envio</span>
         </div>
         <div class="col-md-8 col-8">
-          <span>{{(cartState | async)?.cart?.totalCargoPrice?.toFixed(2) | number:'1.2' }} R$</span>
+          <span>R$ {{(cartState | async)?.cart?.totalCargoPrice?.toFixed(2) | number:'1.2' }}</span>
         </div>
       </div>
   
@@ -58,7 +55,7 @@
           <span class="label">Total</span>
         </div>
         <div class="col-md-8 col-8">
-          <span>{{(cartState | async)?.cart?.totalPrice?.toFixed(2) | number:'1.2' }} R$</span>
+          <span>R$ {{(cartState | async)?.cart?.totalPrice?.toFixed(2) | number:'1.2' }}</span>
         </div>
       </div>
     </div>

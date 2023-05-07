@@ -19,6 +19,8 @@ export class PasswordForgotVerificationComponent implements OnInit, OnDestroy {
 
   isVerified: boolean;
   authSubscription: Subscription;
+  errorAlertVisible = false;
+  successAlertVisible = false;
 
   forgotPasswordResetForm: FormGroup | any;
   passwordForgotToken: string = '';
@@ -67,12 +69,14 @@ export class PasswordForgotVerificationComponent implements OnInit, OnDestroy {
       this.forgotPasswordResetForm.value.newPasswordGroup.newPasswordConfirm
     ).pipe(take(1),
       catchError(error => {
-        alert('Um erro ocorreu. Por favor, tente novamente.');
+        this.errorAlertVisible = true;
         return throwError(() => new Error(error));
       }))
       .subscribe(res => {
-        alert('Senha alterada com sucesso! \nPor favor faça login novamente.');
-        this.router.navigate(['/login']);
+        this.successAlertVisible = true;
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+      }, 5000);
       });
   }
 }

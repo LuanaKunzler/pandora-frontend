@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CartRoutes } from './cart.routes';
 import { EmptyCartComponent } from './empty-cart/empty-cart.component';
 import { InterestedComponent } from './interested/interested.component';
+import { AlertModule } from 'ngx-bootstrap/alert';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { InterestedComponent } from './interested/interested.component';
     CommonModule,
     RouterModule.forChild(CartRoutes),
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    AlertModule
   ],
   declarations: [CartComponent, EmptyCartComponent, InterestedComponent]
 })

@@ -42,7 +42,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="zip">ZIP</label>
-                <input type="text" id="zip" class="form-control" name="zip" formControlName="zip" [maxlength]="6"
+                <input type="text" id="zip" class="form-control" name="zip" formControlName="zip" [maxlength]="8"
                   [minlength]="5">
                 <span *ngIf="shippingForm.get('zip').invalid && shippingForm.get('zip').touched" class="alert-danger">
                     Insira um número de CEP válido!
@@ -101,12 +101,12 @@
           <div class="controls col-md-6">
             <div class="row">
               <div class="col-md-6">
-                <a routerLink="/checkout/personal" class="btn back" type="button">
+                <a routerLink="/checkout/personal" class="btn btn-secondary back" type="button">
                   Voltar
                 </a>
               </div>
               <div class="col-md-6">
-                <button class="btn btn-info" type="submit" [disabled]="shippingForm.invalid || shippingForm.pending">
+                <button class="btn btn-info next" type="submit" [disabled]="shippingForm.invalid || shippingForm.pending">
                   Continuar
                 </button>
               </div>

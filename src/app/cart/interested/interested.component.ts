@@ -41,10 +41,10 @@ export class InterestedComponent implements OnInit {
   }
 
   scrollLeft() {
-    this.interestedCards.nativeElement.scrollLeft -= 250;
+    this.interestedCards.nativeElement.scrollLeft -= 325;
   }
 
   scrollRight() {
-    this.interestedCards.nativeElement.scrollLeft += 250;
+    this.interestedCards.nativeElement.scrollLeft += 325;
   }
 }

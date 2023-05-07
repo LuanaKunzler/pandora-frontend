@@ -9,10 +9,12 @@
       font-size: 14px;
       color: gray;
       font-weight: bold;
+      margin-top: 20px;
     }
 
     input,
     textarea {
+      margin-top: 5px;
       border-radius: 10px;
     }
 
@@ -28,13 +30,10 @@
       justify-content: flex-end;
 
       button {
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-        padding-left: 35px;
-        padding-right: 35px;
-        font-size: 14px;
+        color:#333;
+        height: 50%;
         border-radius: 10px;
+        margin-top: 20px;
       }
     }
   }

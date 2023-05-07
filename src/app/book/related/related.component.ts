@@ -57,11 +57,11 @@ export class RelatedComponent implements OnInit, OnDestroy {
   }
 
   scrollLeft() {
-    this.relatedCards.nativeElement.scrollLeft -= 250;
+    this.relatedCards.nativeElement.scrollLeft -= 325;
   }
 
   scrollRight() {
-    this.relatedCards.nativeElement.scrollLeft += 250;
+    this.relatedCards.nativeElement.scrollLeft += 325;
   }
 
 }

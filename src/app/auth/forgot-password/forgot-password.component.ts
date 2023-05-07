@@ -14,6 +14,8 @@ export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm: FormGroup | any;
   emailPattern = '^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$';
   innerLoading = false;
+  errorAlertVisible = false;
+  successAlertVisible = false;
 
   constructor(private accountService: AccountService) {
   }
@@ -30,14 +32,14 @@ export class ForgotPasswordComponent implements OnInit {
       .pipe(take(1), catchError(
         error => {
           this.innerLoading = false;
-          alert('An error occurred. Please try again.');
-          return throwError(error);
+          this.errorAlertVisible = true;
+          return throwError(() => new Error(error));
         }
       ))
       .subscribe(res => {
         this.innerLoading = false;
         this.forgotPasswordForm.reset();
-        alert('Sucesso! Um link de verificação foi enviado para o seu e-mail.');
+        this.successAlertVisible = true;
       });
 
   }

@@ -20,7 +20,7 @@
         font-weight: bold;
         color: black;
         span {
-          color: #f4ea39;
+          color: #333;
           font-weight: 400;
         }
       }
@@ -37,8 +37,7 @@
     }
 
     hr {
-      margin-left: -20px;
-      margin-right: -20px;
+      width: 100%;
     }
 
     .left-panel {
@@ -99,7 +98,7 @@
           }
 
           .price {
-            color: #f4ea39;
+            color: #333;
             font-weight: bold;
           }
         }

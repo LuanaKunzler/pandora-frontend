@@ -15,6 +15,8 @@ export class ResetPasswordComponent implements OnInit {
 
   resetPasswordForm: FormGroup | any;
   innerLoading = false;
+  errorAlertVisible = false;
+  successAlertVisible = false;
 
   constructor(private accountService: AccountService) {
   }
@@ -38,13 +40,13 @@ export class ResetPasswordComponent implements OnInit {
       .pipe(take(1), catchError(
         error => {
           this.innerLoading = false;
-          alert('Error resetting password. Please try again.');
-          return throwError(error);
+          this.errorAlertVisible = true;
+          return throwError(() => new Error(error));
         }
       ))
       .subscribe(res => {
         this.innerLoading = false;
-        alert('Success! Your password has been changed.');
+        this.successAlertVisible = true;
         this.resetPasswordForm.reset();
       });
   }

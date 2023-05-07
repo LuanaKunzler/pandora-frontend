@@ -35,6 +35,7 @@ import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-logi
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../enviroments/enviroment';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
     EffectsModule.forRoot([CartEffects, OrderEffects, AuthEffects, ShowcaseEffects, BrowseEffects]),
     RouterModule.forRoot(AppRoutes, { useHash: false, preloadingStrategy: PreloadAllModules }),
     AngularFireModule.initializeApp(environment.firebase),
-    NgbToastModule
+    NgbToastModule,
+    AccordionModule.forRoot()
   ],
   providers: [BookService, CartService, OrderService, TokenService, AuthGuardService, NonAuthGuardService, AccountService,
     {

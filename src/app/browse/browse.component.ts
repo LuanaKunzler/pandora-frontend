@@ -90,15 +90,16 @@ export class BrowseComponent implements OnInit, OnDestroy {
     }
   }
 
-  selectMin(minPrice: string) {
-    this.minPrice = minPrice.trim().length === 0 ? '0' : minPrice.trim();
+  selectMin(event: any) {
+    const minPrice = event.target.value.trim().length === 0 ? '0' : event.target.value.trim();
+    this.minPrice = minPrice;
     this.getBooks();
   }
 
-  selectMax(maxPrice: string) {
-    this.maxPrice = maxPrice.trim().length === 0 ? '0' : maxPrice.trim();
+  selectMax(event: any) {
+    const maxPrice = event.target.value.trim().length === 0 ? '0' : event.target.value.trim();
+    this.maxPrice = maxPrice;
     this.getBooks();
-
   }
 
   selectCategory(category: string) {
@@ -111,8 +112,9 @@ export class BrowseComponent implements OnInit, OnDestroy {
     this.getBooks();
   }
 
-  selectSort(sort: string) {
-    this.selectedSort = sort;
+  selectSort(event: Event) {
+    const target = event.target as HTMLSelectElement;
+    this.selectedSort = target.value;    
     this.getBooks();
   }
 
@@ -136,7 +138,7 @@ export class BrowseComponent implements OnInit, OnDestroy {
 
   getBooks() {
     this.selectedPage = 0;
-    this.store.dispatch(new BrowseActions.FetchBooks({ page: this.selectedPage, sort: this.selectedSort, category: this.selectedCategory, author: this.selectedAuthor, minPrice: this.minPrice, maxPrice: this.maxPrice }));
+    this.store.dispatch(new BrowseActions.FetchBooks({ page: this.selectedPage, sort: this.selectedSort, category: this.selectedCategory, author: this.selectedAuthor, minPrice: this.minPrice, maxPrice: this.maxPrice }));    
     this.getBooksCount();
     this.selectedPage++;
   }

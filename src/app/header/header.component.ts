@@ -25,6 +25,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   cartItemCountSubscription: Subscription = new Subscription;
   cartItemCount = 0;
   isCollapsed = true;
+  errorAlertVisible = false;
+  successAlertVisible = false;
 
   authorizationStateSubscription: Subscription = new Subscription;
 
@@ -94,7 +96,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.store.dispatch(new OrderActions.IsCheckoutActive(true));
           this.router.navigate(['/checkout/personal'], { relativeTo: this.route });
         } else {
-          alert('Sua conta está inativa. Você deve ativar sua conta para comprar.\nVerifique seu e-mail.');
+          this.errorAlertVisible = true;
         }
       });
   }

@@ -57,6 +57,7 @@ export interface User {
     author: Author;
     bookUrl: string;
     unitPrice: number;
+    cargoPrice: number;
   }
   
   export interface Author {

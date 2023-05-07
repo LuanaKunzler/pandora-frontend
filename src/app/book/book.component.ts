@@ -75,7 +75,7 @@ export class BookComponent implements OnInit, OnDestroy {
           .subscribe(
             (data: Book) => {
               this.book = data;
-              this.innerLoading = false;
+              this.innerLoading = false;              
             }
           );
       }

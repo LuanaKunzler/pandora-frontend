@@ -4,7 +4,16 @@
     </div>
     <hr>
     <div *ngIf="innerLoading" class="loader"></div>
-  
+    <ngb-toast [class]="'bg-danger text-light'" *ngIf="errorAlertVisible" [autohide]="true" [delay]="5000" (hidden)="errorAlertVisible = false">
+      Um erro ocorreu. Atualize sua página.
+      <button type="button" class="btn-close" aria-label="Fechar" (click)="errorAlertVisible = false"></button>
+    </ngb-toast>
+    
+    <ngb-toast [class]="'bg-success text-light'" *ngIf="successAlertVisible" [autohide]="true" [delay]="5000" (hidden)="successAlertVisible = false">      
+      Seu endereço foi atualizado com sucesso!
+      <button type="button" class="btn-close" aria-label="Fechar" (click)="successAlertVisible = false"></button>
+    </ngb-toast> 
+    
     <div *ngIf="!innerLoading">
       <form [formGroup]="addressForm" (ngSubmit)="onSubmitAddressForm()">
         <div class="info">
@@ -44,8 +53,8 @@
   
             <div class="col-md-6">
               <div class="form-group">
-                <label for="zip">ZIP</label>
-                <input type="text" id="zip" class="form-control" name="zip" formControlName="zip" [maxlength]="6"
+                <label for="zip">Zip</label>
+                <input type="text" id="zip" class="form-control" name="zip" formControlName="zip" [maxlength]="8"
                   [minlength]="5">
                 <span *ngIf="addressForm.get('zip').invalid && addressForm.get('zip').touched" class="alert-danger">
                     Insira um número de CEP válido!
@@ -69,8 +78,8 @@
   
         <div class="row controls">
           <div class="col-md-12">
-            <button class="btn btn-info" type="submit" [disabled]="addressForm.invalid || addressForm.pending">
-              Atualizar
+            <button class="btn btn-primary" type="submit" [disabled]="addressForm.invalid || addressForm.pending">
+              <p>Atualizar</p>
             </button>
           </div>
   

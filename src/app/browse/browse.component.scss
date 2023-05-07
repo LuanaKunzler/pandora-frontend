@@ -35,7 +35,7 @@
     }
 
     .price {
-      margin-top: 25px;
+      margin-top: 40px;
       p {
         margin: 0;
         margin-bottom: 10px;
@@ -78,12 +78,13 @@
       }
     }
 
-    .color {
-      margin-top: 25px;
+    .authors {
+      margin-top: 40px;
+      max-height: 20vh;
+      overflow-y: scroll;
       p {
+        color: black;
         font-weight: bold;
-        margin: 0;
-        margin-bottom: 5px;
         display: inline-block;
         &.remove {
           color: #f4ea39;
@@ -91,26 +92,17 @@
           cursor: pointer;
         }
       }
-      div {
-        display: flex;
-        flex-direction: row;
-        div {
-          cursor: pointer;
-          width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          margin-left: 3px;
-          margin-right: 3px;
-        }
+      .author {
+        color: #292c2f;
+        cursor: pointer;
 
-        div:first-child {
-          margin-left: 0;
+        &.active {
+          color: #f4ea39;
         }
+      }
 
-        .active {
-          position: relative;
-          bottom: 5px;
-        }
+      .author:hover {
+        color: #f4ea39;
       }
     }
   }
@@ -118,7 +110,7 @@
   .browse-content {
     position: relative;
     .book-count {
-      margin: 0;
+      margin: 10px;
       color: gray;
       position: absolute;
       top: 100%;
@@ -144,7 +136,9 @@
   .book {
     margin-top: 10px;
     text-align: center;
+    white-space: nowrap;
     .book-card {
+      display: inline-block;
       padding: 15px;
       .row {
         padding-left: 10px;
@@ -155,15 +149,17 @@
         }
       }
       hr {
-        width: 75%;
+        width: 55%;
         margin-bottom: 5px;
+        margin-left: auto;
+        margin-right: auto;
       }
       p {
         margin-bottom: 0;
         font-size: 12px;
       }
       a {
-        color: #f4ea39;
+        color: #333;
         text-decoration: none;
       }
       img {
