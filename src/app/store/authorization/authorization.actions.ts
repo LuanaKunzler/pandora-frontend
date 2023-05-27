@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 import { HttpError } from '../app.reducers';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import { GoogleRegisterUserRequest, GoogleSignInRequest } from '../model';
+import { GoogleSignInRequest } from '../model';
 
 export const SIGN_UP = 'SIGN_UP';
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
@@ -43,19 +43,9 @@ export class SignUpFailure implements Action {
   constructor(public payload: HttpError) {}
 }
 
-export class GoogleSignUp implements Action {
-  readonly type = GOOGLE_SIGN_UP;
-
-  constructor(public payload: {
-    token: string,
-    provider: string,
-    googleRegisterUserRequest: GoogleRegisterUserRequest
-  }) {}
-}
-
 export class GoogleSignUpSuccess implements Action {
   readonly type = GOOGLE_SIGN_UP_SUCCESS;
-  constructor(public payload: { user: firebase.User, token?: string, provider: string }) {}
+  constructor(public payload: { effect: string }) {}
 }
 
 export class GoogleSignUpFailure implements Action {
@@ -125,7 +115,7 @@ export class GoogleSignInFailure implements Action {
   constructor(public payload: HttpError) {}
 }
 
-export type AuthActions = SignUp | SignUpSuccess | SignUpFailure | GoogleSignUp | GoogleSignUpSuccess | GoogleSignUpFailure | SignIn | SignInSuccess
+export type AuthActions = SignUp | SignUpSuccess | SignUpFailure | GoogleSignUpSuccess | GoogleSignUpFailure | SignIn | SignInSuccess
   | SignOut | SignOutSuccess | CheckIfLoggedIn
   | FetchVerificationStatus | FetchVerificationStatusSuccess | GoogleSignInSuccess | GoogleSignInFailure | GoogleSignIn
   | AuthError;

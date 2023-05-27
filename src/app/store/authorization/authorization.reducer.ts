@@ -46,22 +46,12 @@ export function authorizationReducer(
         loading: false
       };
 
-    case AuthorizationActions.GOOGLE_SIGN_UP:
-      return {
-        ...state,
-        loading: true,
-        provider: action.payload.provider,
-      };
-
-    case AuthorizationActions.GOOGLE_SIGN_UP_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        user: {
-          ...action.payload.user,
-          provider: action.payload.provider
-        }
-      };
+      case AuthorizationActions.GOOGLE_SIGN_IN:
+        return {
+          ...state,
+          loading: true,
+          provider: action.payload.googleSignInRequest,
+        };
 
     case AuthorizationActions.GOOGLE_SIGN_UP_FAILURE:
       return {
@@ -81,6 +71,18 @@ export function authorizationReducer(
         ],
         loading: false,
       };
+
+      case AuthorizationActions.GOOGLE_SIGN_IN_SUCCESS:
+        return {
+          ...state,
+          authenticated: true,
+          errors: [
+            ...state.errors.filter(
+              (error) => error.errorEffect !== action.payload.token
+            ),
+          ],
+          loading: false,
+        };
 
     case AuthorizationActions.AUTH_ERROR:
       const errors = [...state.errors];

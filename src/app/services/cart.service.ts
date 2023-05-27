@@ -7,7 +7,7 @@ import { Cart } from '../store/model';
 @Injectable()
 export class CartService {
 
-  url = `${config.apiUrl}/api/cart`;
+  url = `${config.apiUrl}/api/user/cart`;
 
   constructor(private httpClient: HttpClient) {
   }

@@ -1,4 +1,4 @@
-import { GoogleRegisterUserRequest, GoogleSignInRequest, User } from './../store/model';
+import { GoogleSignInRequest, User } from './../store/model';
 import { Injectable } from '@angular/core';
 import {
   HttpClient,
@@ -19,7 +19,7 @@ import * as fromApp from '../../../src/app/store/app.reducers';
 @Injectable()
 export class AccountService {
   publicUrl = `${config.apiUrl}/api/public/account`;
-  url = `${config.apiUrl}/api/account`;
+  url = `${config.apiUrl}/api/user/account`;
   googleUrl = `${config.apiUrl}/api/public/google-auth`;
 
   constructor(
@@ -34,25 +34,6 @@ export class AccountService {
       password,
       passwordRepeat
     }, { headers: { 'Content-type': 'application/json; charset=utf-8' } });
-  }
-  
-
-  signUpWithGoogle(
-    token: string,
-    googleRegisterUserRequest: GoogleRegisterUserRequest
-  ): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    const request = {
-      email: googleRegisterUserRequest.email,
-      firstName: googleRegisterUserRequest.firstName,
-      lastName: googleRegisterUserRequest.lastName,
-      providerId: googleRegisterUserRequest.providerId,
-      provider: googleRegisterUserRequest.provider,
-    };
-
-    return this.httpClient.post(`${this.googleUrl}/google-registration`, request, { headers })
   }
 
   signInWithGoogle(googleSignInRequest: GoogleSignInRequest): Observable<any> {

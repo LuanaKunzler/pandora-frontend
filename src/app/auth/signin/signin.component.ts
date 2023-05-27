@@ -44,7 +44,6 @@ export class SigninComponent implements OnInit {
     this.authorizationState = this.store.select('authorization');
   }
 
-
   onSubmitted() {
     this.store.dispatch(new AuthActions.SignIn({
       email: this.signInForm.value.email,
@@ -58,11 +57,13 @@ export class SigninComponent implements OnInit {
       .then(async (result) => {
         const user = result.user;
         const credential = result.credential;
-  
+        
         if (user && credential && 'accessToken' in credential) {
           const idToken = await user.getIdToken();
           const googleSignInRequest: GoogleSignInRequest = {
               email: user.email || '',
+              firstName: user.displayName ? user.displayName.split(' ')[0] : '',
+              lastName: user.displayName ? user.displayName.split(' ')[1] : '',
               providerId: user.uid,
               provider: 'GOOGLE',
               idToken: idToken

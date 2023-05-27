@@ -18,15 +18,15 @@ export class BrowseComponent implements OnInit, OnDestroy {
 
   sortBy = [
     {
-      display: 'Any',
+      display: 'Tudo',
       value: 'any'
     },
     {
-      display: 'Lowest Price',
+      display: 'Menor Preço',
       value: 'lowest'
     },
     {
-      display: 'Highest Price',
+      display: 'Maior Preço',
       value: 'highest'
     }
   ];

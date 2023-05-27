@@ -1,13 +1,7 @@
-export interface GoogleRegisterUserRequest {
+export interface GoogleSignInRequest {
   email: string;
   firstName: string;
   lastName: string;
-  providerId: string;
-  provider: string;
-}
-
-export interface GoogleSignInRequest {
-  email: string;
   providerId: string;
   provider: string;
   idToken: string;

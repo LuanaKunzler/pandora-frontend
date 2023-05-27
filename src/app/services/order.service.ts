@@ -7,7 +7,7 @@ import { Orders, Checkout } from '../store/model';
 @Injectable()
 export class OrderService {
 
-  url = `${config.apiUrl}/api/order`;
+  url = `${config.apiUrl}/api/user/order`;
   private pageSize = 3;
 
   constructor(private httpClient: HttpClient) {

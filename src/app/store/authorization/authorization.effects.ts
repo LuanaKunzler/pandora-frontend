@@ -16,45 +16,9 @@ import {
   switchMap,
   tap,
 } from 'rxjs/operators';
-import { SignIn } from './authorization.actions';
-import { GoogleRegisterUserRequest, GoogleSignInRequest } from '../model';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
 export class AuthEffects {
-  // @Effect()
-  // signUp = this.actions$.pipe(
-  //   ofType<AuthorizationActions.SignUp>(AuthorizationActions.SIGN_UP),
-  //   map((action) => action.payload),
-  //   switchMap((credentials) =>
-  //     this.accountService
-  //       .createAccount(
-  //         credentials.email,
-  //         credentials.password,
-  //         credentials.passwordRepeat
-  //       )
-  //       .pipe(
-  //         switchMap((res) => [
-  //           {
-  //             type: AuthorizationActions.SIGN_UP_SUCCESS,
-  //             payload: { effect: AuthorizationActions.SIGN_UP },
-  //           },
-  //           new AuthorizationActions.SignIn({
-  //             email: res.email,
-  //             password: res.password,
-  //           }),
-  //         ]),
-  //         catchError((error) =>
-  //           of(
-  //             new AuthorizationActions.AuthError({
-  //               error,
-  //               errorEffect: AuthorizationActions.SIGN_UP,
-  //             })
-  //           )
-  //         )
-  //       )
-  //   )
-  // );
 
   @Effect()
   signUp = this.actions$.pipe(
@@ -137,6 +101,48 @@ export class AuthEffects {
   );
 
   @Effect()
+  googleSignIn$ = this.actions$.pipe(
+    ofType(AuthorizationActions.GOOGLE_SIGN_IN),
+    map(
+      (action: AuthorizationActions.GoogleSignIn) =>
+        action.payload.googleSignInRequest
+    ),
+    switchMap(
+      (googleSignInRequest: {
+        email: string;
+        firstName: string;
+        lastName: string;
+        providerId: string;
+        provider: string;
+        idToken: string;
+      }) =>
+        this.accountService.signInWithGoogle(googleSignInRequest).pipe(
+          switchMap((response) => {
+            console.log(response);
+            
+            this.tokenService.saveToken(response);
+            this.router.navigate(['/']);
+            return [
+              {
+                type: AuthorizationActions.GOOGLE_SIGN_IN_SUCCESS,
+                payload: { effect: AuthorizationActions.GOOGLE_SIGN_IN },
+              },
+              { type: AuthorizationActions.FETCH_VERIFICATION_STATUS },
+            ];
+          }),
+          catchError((error) =>
+            of(
+              new AuthorizationActions.AuthError({
+                error,
+                errorEffect: AuthorizationActions.GOOGLE_SIGN_IN,
+              })
+            )
+          )
+        )
+    )
+  );
+
+  @Effect()
   signOut = this.actions$.pipe(
     ofType(AuthorizationActions.SIGN_OUT),
     concatMap((action: AuthorizationActions.SignOut) => {
@@ -204,78 +210,4 @@ export class AuthEffects {
     private router: Router,
     private accountService: AccountService
   ) {}
-
-  // @Effect()
-  // googleSignUp$ = this.actions$.pipe(
-  //   ofType(AuthorizationActions.GOOGLE_SIGN_UP),
-  //   map((action: AuthorizationActions.GoogleSignUp) => action.payload),
-  //   switchMap(
-  //     (payload: {
-  //       token: string;
-  //       googleRegisterUserRequest: GoogleRegisterUserRequest;
-  //     }) => {
-  //       return this.accountService
-  //         .signUpWithGoogle(payload.token, payload.googleRegisterUserRequest)
-  //         .pipe(
-  //           switchMap((res) => {
-  //             this.tokenService.saveToken(res.accessToken);
-  //             const googleSignInRequest: GoogleSignInRequest = {
-  //               email: res.email,
-  //               providerId: res.providerId,
-  //               provider: 'GOOGLE',
-  //             };
-  //             return of(
-  //               new AuthorizationActions.GoogleSignIn({ googleSignInRequest })
-  //             );
-  //           }),
-  //           catchError((error) =>
-  //             of(
-  //               new AuthorizationActions.AuthError({
-  //                 error,
-  //                 errorEffect: AuthorizationActions.GOOGLE_SIGN_UP,
-  //               })
-  //             )
-  //           )
-  //         );
-  //     }
-  //   )
-  // );
-
-  @Effect()
-  googleSignIn$ = this.actions$.pipe(
-    ofType(AuthorizationActions.GOOGLE_SIGN_IN),
-    map(
-      (action: AuthorizationActions.GoogleSignIn) =>
-        action.payload.googleSignInRequest
-    ),
-    switchMap(
-      (googleSignInRequest: {
-        email: string;
-        providerId: string;
-        provider: string;
-        idToken: string;
-      }) =>
-        this.accountService.signInWithGoogle(googleSignInRequest).pipe(
-          switchMap((response: { token: string }) => {
-            this.tokenService.saveToken(response.token);
-            this.router.navigate(['/']);
-            return [
-              {
-                type: AuthorizationActions.GOOGLE_SIGN_IN_SUCCESS,
-                payload: { effect: AuthorizationActions.GOOGLE_SIGN_IN },
-              },
-              { type: AuthorizationActions.FETCH_VERIFICATION_STATUS },
-            ];
-          }),
-          catchError((error) =>
-            of(
-              new AuthorizationActions.AuthError({
-                error,
-                errorEffect: AuthorizationActions.GOOGLE_SIGN_IN,
-              })
-            )
-          )
-        )
-    )
-  );
 }

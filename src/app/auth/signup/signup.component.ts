@@ -16,7 +16,7 @@ import {
 } from '../../store/authorization/authorization.actions';
 import { HttpError } from '../../store/app.reducers';
 import { AccountService } from 'src/app/services/account.service';
-import { GoogleRegisterUserRequest } from 'src/app/store/model';
+import { GoogleSignInRequest } from 'src/app/store/model';
 import { ErrorMessage } from 'src/app/common/error-message';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
@@ -88,21 +88,16 @@ export class SignupComponent implements OnInit {
 
         if (user && credential && 'accessToken' in credential) {
           const token = await user.getIdToken();
-          const googleRegisterUserRequest: GoogleRegisterUserRequest = {
+          const googleSignInRequest: GoogleSignInRequest = {
             email: user.email || '',
             firstName: user.displayName ? user.displayName.split(' ')[0] : '',
             lastName: user.displayName ? user.displayName.split(' ')[1] : '',
             providerId: user.uid,
             provider: 'GOOGLE',
+            idToken: token
           };
-
-          this.store.dispatch(
-            new AuthActions.GoogleSignUp({
-              token,
-              provider: googleRegisterUserRequest.provider,
-              googleRegisterUserRequest,
-            })
-          );
+          
+          this.store.dispatch(new AuthActions.GoogleSignIn({ googleSignInRequest }));
         }
       })
       .catch((error) => {
