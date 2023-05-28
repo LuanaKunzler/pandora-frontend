@@ -1,6 +1,7 @@
 .header {
   nav {
-    justify-content: space-around;
+    justify-content: space-between;
+    display: flex;
     background-color: white;
 
     .navbar-brand {
@@ -10,7 +11,8 @@
 
     .logo {
       flex-grow: 1;
-      text-align: center;
+      text-align: left;
+      margin-left: 2%;
     }
 
     .pages {
@@ -23,7 +25,7 @@
     }
 
     .search {
-      flex-grow: 3;
+      flex-grow: 4;
       div,
       input {
         width: 100%;
@@ -39,8 +41,8 @@
     }
 
     .end {
-      justify-content: center;
-      flex-grow: 3;
+      justify-content: flex-end;
+      flex-grow: 1;
 
       .login {
         padding-left: 10px;
@@ -52,6 +54,17 @@
         }
       }
       .register {
+        margin-left: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 10px;
+        p {
+          margin: 0;
+          color: #333;
+        }
+      }
+
+      .admin-mode {
         margin-left: 5px;
         padding-left: 10px;
         padding-right: 10px;
@@ -195,7 +208,6 @@
                     margin-left: 10px;
                     display: inline-block;
                   }
-                  
                 }
 
                 .price {
@@ -251,6 +263,33 @@
 
       .dropdown-toggle::after {
         display: none;
+      }
+    }
+
+    .end-btn {
+      justify-content: flex-end;
+      flex-grow: 3;
+
+      .user-mode {
+        margin-right: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 10px;
+        p {
+          margin: 0;
+          color: #333;
+        }
+      }
+
+      .logout-admin {
+        margin-right: 50px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 10px;
+        p {
+          margin: 0;
+          color: #333;
+        }
       }
     }
   }

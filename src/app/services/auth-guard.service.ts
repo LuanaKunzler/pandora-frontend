@@ -13,11 +13,15 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.store.select('authorization')
-      .pipe(take(1), map((authState: fromAuth.AuthorizationState) => {
-        if (!authState.authenticated) {
-          this.router.navigate(['/login']);
-        }
-        return authState.authenticated;
-      }));
+      .pipe(
+        take(1),
+        map((authState: fromAuth.AuthorizationState) => {
+          if (!authState.authenticated || !authState.userRole.includes('ROLE_ADMIN')) {
+            this.router.navigate(['/']);
+            return false;
+          }
+          return true;
+        })
+      );
   }
 }

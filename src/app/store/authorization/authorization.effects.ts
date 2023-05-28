@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
+import * as fromApp from '../../store/app.reducers';
 import * as AuthorizationActions from './authorization.actions';
 import * as CartActions from '../cart/cart.actions';
 import * as OrderActions from '../order/order.actions';
 import * as ShowcaseActions from '../showcase/showcase.actions';
 import { TokenService } from '../../services/token.service';
 import { AccountService } from '../../services/account.service';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import {
   catchError,
   concatMap,
@@ -16,9 +17,13 @@ import {
   switchMap,
   tap,
 } from 'rxjs/operators';
+import { AuthorizationState } from './authorization.reducer';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class AuthEffects {
+  private authorizationState: Observable<AuthorizationState> =
+    new Observable<AuthorizationState>();
 
   @Effect()
   signUp = this.actions$.pipe(
@@ -77,15 +82,20 @@ export class AuthEffects {
       return this.tokenService
         .obtainAccessToken(credentials.email, credentials.password)
         .pipe(
-          switchMap((res) => {
+          switchMap((res: any) => {
+            const userRoles =
+              res.roles && res.roles.length > 0 ? res.roles : [];
             this.tokenService.saveToken(res);
-            this.router.navigate(['/']);
             return [
               {
                 type: AuthorizationActions.SIGN_IN_SUCCESS,
                 payload: { effect: AuthorizationActions.SIGN_IN },
               },
               { type: AuthorizationActions.FETCH_VERIFICATION_STATUS },
+              {
+                type: AuthorizationActions.UPDATE_USER_ROLE,
+                payload: { userRole: userRoles || [] },
+              },
             ];
           }),
           catchError((error) =>
@@ -97,6 +107,17 @@ export class AuthEffects {
             )
           )
         );
+    }),
+    tap(() => {
+      this.authorizationState.subscribe((authState) => {
+        if (authState.authenticated) {
+          if (authState.userRole.includes('ROLE_ADMIN')) {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/']);
+          }
+        }
+      });
     })
   );
 
@@ -117,17 +138,20 @@ export class AuthEffects {
         idToken: string;
       }) =>
         this.accountService.signInWithGoogle(googleSignInRequest).pipe(
-          switchMap((response) => {
-            console.log(response);
-            
-            this.tokenService.saveToken(response);
-            this.router.navigate(['/']);
+          switchMap((res) => {
+            const userRoles =
+              res.roles && res.roles.length > 0 ? res.roles : [];
+            this.tokenService.saveToken(res);
             return [
               {
                 type: AuthorizationActions.GOOGLE_SIGN_IN_SUCCESS,
                 payload: { effect: AuthorizationActions.GOOGLE_SIGN_IN },
               },
               { type: AuthorizationActions.FETCH_VERIFICATION_STATUS },
+              {
+                type: AuthorizationActions.UPDATE_USER_ROLE,
+                payload: { userRole: userRoles || [] },
+              },
             ];
           }),
           catchError((error) =>
@@ -139,7 +163,18 @@ export class AuthEffects {
             )
           )
         )
-    )
+    ),
+    tap(() => {
+      this.authorizationState.subscribe((authState) => {
+        if (authState.authenticated) {
+          if (authState.userRole.includes('ROLE_ADMIN')) {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/']);
+          }
+        }
+      });
+    })
   );
 
   @Effect()
@@ -205,9 +240,12 @@ export class AuthEffects {
   );
 
   constructor(
+    private store: Store<fromApp.AppState>,
     private actions$: Actions,
     private tokenService: TokenService,
     private router: Router,
     private accountService: AccountService
-  ) {}
+  ) {
+    this.authorizationState = this.store.select('authorization');
+  }
 }

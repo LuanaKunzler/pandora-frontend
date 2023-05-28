@@ -1,5 +1,6 @@
 import { GPageNotFoundComponent } from './g-page-not-found/g-page-not-found.component';
 import { Routes } from '@angular/router';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const AppRoutes: Routes = [
 { path: 'not-found', component: GPageNotFoundComponent, data: { message: 'Page not found!' } },
@@ -18,6 +19,11 @@ loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutMod
 {
 path: 'faq',
 loadChildren: () => import('./faq/faq.module').then(m => m.FaqModule)
+},
+{
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    canActivate: [AuthGuardService] // Aplica o AuthGuardService para permitir somente os usuários com a role "ADMIN"
 },
 { path: '**', redirectTo: '/not-found' }
 ];

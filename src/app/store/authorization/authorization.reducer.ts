@@ -2,6 +2,8 @@ import * as AuthorizationActions from './authorization.actions';
 import { HttpError } from '../app.reducers';
 
 export interface AuthorizationState {
+  userRole: string;
+  userMode: boolean;
   authenticated: boolean;
   isActive: boolean;
   errors: Array<HttpError>;
@@ -10,6 +12,8 @@ export interface AuthorizationState {
 }
 
 const initialState: AuthorizationState = {
+  userRole: '',
+  userMode: false,
   authenticated: false,
   isActive: false,
   errors: [],
@@ -21,6 +25,16 @@ export function authorizationReducer(
   action: AuthorizationActions.AuthActions
 ) {
   switch (action.type) {
+    case AuthorizationActions.UPDATE_USER_ROLE:
+      return {
+        ...state,
+        userRole: action.payload.userRole,
+      };
+    case AuthorizationActions.SET_USER_MODE:
+      return {
+        ...state,
+        userMode: action.payload,
+      };
     case AuthorizationActions.SIGN_IN:
     case AuthorizationActions.SIGN_OUT:
     case AuthorizationActions.SIGN_UP:
@@ -43,15 +57,15 @@ export function authorizationReducer(
       return {
         ...state,
         authError: action.payload,
-        loading: false
+        loading: false,
       };
 
-      case AuthorizationActions.GOOGLE_SIGN_IN:
-        return {
-          ...state,
-          loading: true,
-          provider: action.payload.googleSignInRequest,
-        };
+    case AuthorizationActions.GOOGLE_SIGN_IN:
+      return {
+        ...state,
+        loading: true,
+        provider: action.payload.googleSignInRequest,
+      };
 
     case AuthorizationActions.GOOGLE_SIGN_UP_FAILURE:
       return {
@@ -72,17 +86,17 @@ export function authorizationReducer(
         loading: false,
       };
 
-      case AuthorizationActions.GOOGLE_SIGN_IN_SUCCESS:
-        return {
-          ...state,
-          authenticated: true,
-          errors: [
-            ...state.errors.filter(
-              (error) => error.errorEffect !== action.payload.token
-            ),
-          ],
-          loading: false,
-        };
+    case AuthorizationActions.GOOGLE_SIGN_IN_SUCCESS:
+      return {
+        ...state,
+        authenticated: true,
+        errors: [
+          ...state.errors.filter(
+            (error) => error.errorEffect !== action.payload.token
+          ),
+        ],
+        loading: false,
+      };
 
     case AuthorizationActions.AUTH_ERROR:
       const errors = [...state.errors];

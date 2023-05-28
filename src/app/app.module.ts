@@ -36,7 +36,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../enviroments/enviroment';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
-
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -61,7 +61,8 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     RouterModule.forRoot(AppRoutes, { useHash: false, preloadingStrategy: PreloadAllModules }),
     AngularFireModule.initializeApp(environment.firebase),
     NgbToastModule,
-    AccordionModule.forRoot()
+    AccordionModule.forRoot(),
+    AdminModule
   ],
   providers: [BookService, CartService, OrderService, TokenService, AuthGuardService, NonAuthGuardService, AccountService,
     {

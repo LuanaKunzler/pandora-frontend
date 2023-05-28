@@ -15,7 +15,12 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="pages navbar-nav">
+    <div
+      class="pages navbar-nav"
+      *ngIf="
+        !router.url.includes('/admin')
+      "
+    >
       <div class="home">
         <div
           class="collapse navbar-collapse"
@@ -65,7 +70,8 @@
       </div>
     </div>
 
-    <div class="search navbar-nav">
+    <div class="search navbar-nav" *ngIf="
+    !router.url.includes('/admin')">
       <div
         class="collapse navbar-collapse"
         id="navbarSupportedContent"
@@ -84,7 +90,8 @@
       </div>
     </div>
 
-    <div class="end navbar-nav">
+    <div class="end navbar-nav" *ngIf="
+    !router.url.includes('/admin')">
       <button
         class="login btn btn-secondary"
         *ngIf="!(authorizationState | async)?.authenticated"
@@ -101,49 +108,17 @@
         <p>Cadastrar</p>
       </button>
 
-      <div class="user" *ngIf="(authorizationState | async)?.authenticated">
-        <div ngbDropdown display="dynamic" placement="bottom" autoClose="true">
-          <a class="nav-link" id="dropdownAccount" ngbDropdownToggle>
-            <i class="fa fa-user"></i>
-          </a>
-          <div
-            class="user-dropdown"
-            ngbDropdownMenu
-            aria-labelledby="dropdownAccount"
-          >
-            <div>
-              <a routerLink="/account/information" routerLinkActive="active">
-                <i class="fa fa-user" aria-hidden="true"></i>
-                <p>Perfil</p>
-              </a>
-            </div>
-            <div>
-              <a routerLink="/account/orders" routerLinkActive="active">
-                <i class="fa fa-archive" aria-hidden="true"></i>
-                <p>Pedidos</p>
-              </a>
-            </div>
-            <div>
-              <a routerLink="/account/address" routerLinkActive="active"
-                ><i class="fa fa-home" aria-hidden="true"></i>
-                <p>Endereço</p>
-              </a>
-            </div>
-            <div>
-              <a routerLink="/account/help" routerLinkActive="active">
-                <i class="fa fa-question-circle" aria-hidden="true"></i>
-                <p>Ajuda</p>
-              </a>
-            </div>
-            <div>
-              <a (click)="userSignOut()">
-                <i class="fa fa fa-sign-out" aria-hidden="true"></i>
-                <p>Sair</p>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <button
+        class="admin-mode btn btn-info navbar-nav"
+        *ngIf="
+          !router.url.includes('/admin') &&
+          (authorizationState | async)?.authenticated &&
+          (authorizationState | async)?.userRole?.includes('ROLE_ADMIN')
+        "
+        (click)="switchToAdminMode()"
+      >
+        Perfil Admin
+      </button>
 
       <div
         class="cart navbar-nav"
@@ -221,9 +196,21 @@
                       <p>Checkout</p>
                     </button>
                   </div>
-                  <ngb-toast [class]="'bg-danger text-light'" *ngIf="errorAlertVisible" [autohide]="true" [delay]="5000" (hidden)="errorAlertVisible = false">
-                    Você deve ativar sua conta para comprar!<br>Verifique seu e-mail.
-                    <button type="button" class="btn-close" aria-label="Fechar" (click)="errorAlertVisible = false"></button>
+                  <ngb-toast
+                    [class]="'bg-danger text-light'"
+                    *ngIf="errorAlertVisible"
+                    [autohide]="true"
+                    [delay]="5000"
+                    (hidden)="errorAlertVisible = false"
+                  >
+                    Você deve ativar sua conta para comprar!<br />Verifique seu
+                    e-mail.
+                    <button
+                      type="button"
+                      class="btn-close"
+                      aria-label="Fechar"
+                      (click)="errorAlertVisible = false"
+                    ></button>
                   </ngb-toast>
                 </div>
               </div>
@@ -241,6 +228,76 @@
           </div>
         </div>
       </div>
+
+      <div class="user" *ngIf="(authorizationState | async)?.authenticated">
+        <div ngbDropdown display="dynamic" placement="bottom" autoClose="true">
+          <a class="nav-link" id="dropdownAccount" ngbDropdownToggle>
+            <i class="fa fa-user"></i>
+          </a>
+          <div
+            class="user-dropdown"
+            ngbDropdownMenu
+            aria-labelledby="dropdownAccount"
+          >
+            <div>
+              <a routerLink="/account/information" routerLinkActive="active">
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <p>Perfil</p>
+              </a>
+            </div>
+            <div>
+              <a routerLink="/account/orders" routerLinkActive="active">
+                <i class="fa fa-archive" aria-hidden="true"></i>
+                <p>Pedidos</p>
+              </a>
+            </div>
+            <div>
+              <a routerLink="/account/address" routerLinkActive="active"
+                ><i class="fa fa-home" aria-hidden="true"></i>
+                <p>Endereço</p>
+              </a>
+            </div>
+            <div>
+              <a routerLink="/account/help" routerLinkActive="active">
+                <i class="fa fa-question-circle" aria-hidden="true"></i>
+                <p>Ajuda</p>
+              </a>
+            </div>
+            <div>
+              <a (click)="userSignOut()">
+                <i class="fa fa fa-sign-out" aria-hidden="true"></i>
+                <p>Sair</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="end-btn navbar-nav">
+    <button
+        class="user-mode btn btn-info navbar-nav"
+        *ngIf="
+          router.url.includes('/admin') &&
+          (authorizationState | async)?.authenticated &&
+          (authorizationState | async)?.userRole?.includes('ROLE_USER')
+        "
+        (click)="switchToUserMode()"
+      >
+        Perfil Cliente
+      </button>
+
+      <button
+        class="logout-admin navbar-nav btn btn-secondary"
+        *ngIf="
+          router.url.includes('/admin') &&
+          (authorizationState | async)?.authenticated
+        "
+        (click)="userSignOut()"
+      >
+        <i class="fa fa fa-sign-out" aria-hidden="true"></i>
+        <p>Sair</p>
+      </button>
     </div>
   </nav>
 

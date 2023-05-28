@@ -9,15 +9,12 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import {
-  GoogleSignInFailure,
-  GoogleSignUpFailure,
-  GoogleSignUpSuccess,
-  SignUp,
-} from '../../store/authorization/authorization.actions';
+  GoogleSignInFailure } from '../../store/authorization/authorization.actions';
 import { MyHttpError } from 'src/app/common/myHttpError';
 import { TokenService } from 'src/app/services/token.service';
 import { GoogleSignInRequest } from 'src/app/store/model';
 import { ErrorMessage } from 'src/app/common/error-message';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -32,7 +29,12 @@ export class SigninComponent implements OnInit {
   authorizationState: Observable<AuthorizationState> = new Observable<AuthorizationState>();
 
 
-  constructor(private store: Store<fromApp.AppState>, private afAuth: AngularFireAuth, private tokenService: TokenService) {
+  constructor(
+    private store: Store<fromApp.AppState>,
+    private afAuth: AngularFireAuth,
+    private tokenService: TokenService,
+    private router: Router
+  ) {
   }
 
   ngOnInit() {
@@ -42,6 +44,7 @@ export class SigninComponent implements OnInit {
     });
 
     this.authorizationState = this.store.select('authorization');
+    
   }
 
   onSubmitted() {
@@ -70,7 +73,7 @@ export class SigninComponent implements OnInit {
           };
       
           this.store.dispatch(new AuthActions.GoogleSignIn({ googleSignInRequest }));
-      }
+        }
       })
       .catch((error) => {
         const httpError = new MyHttpError(
@@ -81,7 +84,4 @@ export class SigninComponent implements OnInit {
         this.store.dispatch(action);
       });
   }
-  
-  
-
 }
