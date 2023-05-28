@@ -101,6 +101,17 @@
         <p>Cadastrar</p>
       </button>
 
+      <button
+        class="admin-mode btn btn-info navbar-nav"
+        *ngIf="
+          (authorizationState | async)?.authenticated &&
+          (authorizationState | async)?.userRole?.includes('ROLE_ADMIN')
+        "
+        (click)="switchToAdminMode()"
+      >
+        Perfil Admin
+      </button>
+
       <div class="user" *ngIf="(authorizationState | async)?.authenticated">
         <div ngbDropdown display="dynamic" placement="bottom" autoClose="true">
           <a class="nav-link" id="dropdownAccount" ngbDropdownToggle>

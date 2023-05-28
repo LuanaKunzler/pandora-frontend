@@ -19,6 +19,10 @@ loadChildren: () => import('./checkout/checkout.module').then(m => m.CheckoutMod
 path: 'faq',
 loadChildren: () => import('./faq/faq.module').then(m => m.FaqModule)
 },
+{
+path: 'admin',
+loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+},
 { path: '**', redirectTo: '/not-found' }
 ];
 

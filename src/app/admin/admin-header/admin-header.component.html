@@ -1,0 +1,35 @@
+<!-- <div class="header fixed-top">
+    <button
+        class="user-mode btn btn-info navbar-nav"
+        *ngIf="
+          router.url.includes('/admin') &&
+          (authorizationState | async)?.authenticated &&
+          (authorizationState | async)?.userRole?.includes('ROLE_USER')
+        "
+        (click)="switchToUserMode()"
+      >
+        Perfil Cliente
+      </button>
+
+      <button
+        class="logout-admin navbar-nav btn btn-info"
+        *ngIf="
+          router.url.includes('/admin') &&
+          (authorizationState | async)?.authenticated
+        "
+        (click)="userSignOut()"
+      >
+        <i class="fa fa fa-sign-out" aria-hidden="true"></i>
+        <p>Sair</p>
+      </button>
+</div> -->
+
+<header class="admin-header mat-elevation-z4">
+  <div class="logo">
+    
+  </div>
+  <div class="actions">
+    <button mat-button>Botão 1</button>
+    <button mat-button>Botão 2</button>
+  </div>
+</header>

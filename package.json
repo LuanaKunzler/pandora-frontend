@@ -30,6 +30,7 @@
     "bootstrap": "^5.2.3",
     "firebase": "^9.21.0",
     "js-cookie": "^3.0.5",
+    "material": "^0.5.3",
     "moment": "^2.29.4",
     "nginx": "^1.0.8",
     "ngx-bootstrap": "^10.2.0",

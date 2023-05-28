@@ -10,6 +10,7 @@ import { Observable, Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbDropdownConfig } from '@ng-bootstrap/ng-bootstrap';
 import { take } from 'rxjs/operators';
+import * as fromAuth from '../store/authorization/authorization.reducer';
 
 @Component({
   selector: 'app-header',
@@ -32,7 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<fromApp.AppState>,
-    private router: Router,
+    public router: Router,
     private route: ActivatedRoute,
     public dropdownConfig: NgbDropdownConfig) {
     dropdownConfig.placement = 'bottom-right';
@@ -74,6 +75,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  switchToAdminMode() {
+    this.store.select('authorization')
+      .pipe(take(1))
+      .subscribe((authState: fromAuth.AuthorizationState) => {
+        if (authState.authenticated || authState.userRole.includes('ROLE_ADMIN')) {
+          this.router.navigate(['/admin']);
+        }
+      });
+  }
 
   userSignOut() {
     this.store.dispatch(new AuthorizationActions.SignOut());

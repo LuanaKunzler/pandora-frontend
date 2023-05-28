@@ -13,11 +13,28 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.store.select('authorization')
-      .pipe(take(1), map((authState: fromAuth.AuthorizationState) => {
-        if (!authState.authenticated) {
-          this.router.navigate(['/login']);
-        }
-        return authState.authenticated;
-      }));
+      .pipe(
+        take(1),
+        map((authState: fromAuth.AuthorizationState) => {
+          if (!authState.authenticated) {
+            this.router.navigate(['/login']);
+            return false;
+          }
+  
+          if (authState.userRole.includes('ROLE_ADMIN')) {
+            // Usuários com ROLE_ADMIN têm acesso à rota /admin
+            return true;
+          }
+  
+          if (state.url.startsWith('/admin')) {
+            // Usuários sem ROLE_ADMIN tentando acessar a rota /admin são redirecionados para a rota padrão
+            this.router.navigate(['/']);
+            return false;
+          }
+  
+          return true;
+        })
+      );
   }
+  
 }

@@ -1,3 +1,4 @@
-<app-header></app-header>
+<app-header *ngIf="!isAdminRoute"></app-header>
+<app-admin-header *ngIf="isAdminRoute"></app-admin-header>
 <router-outlet (activate)="onActivate($event)"></router-outlet>
 <app-footer></app-footer>

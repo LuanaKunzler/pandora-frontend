@@ -14,8 +14,9 @@ export class NonAuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return this.store.select('authorization')
       .pipe(map((authState: fromAuth.AuthorizationState) => {
-        if (authState.authenticated) {
-          this.router.navigate(['/']);
+        if (authState.authenticated && authState.userRole.includes('ROLE_ADMIN')) {
+          this.router.navigate(['/admin']); // Redireciona para o portal se o usuário for administrador
+          return false; // Bloqueia o acesso
         }
         return !authState.authenticated;
       }));
