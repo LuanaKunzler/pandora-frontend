@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     this.store.dispatch(new AuthActions.CheckIfLoggedIn());
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.isAdminRoute = event.urlAfterRedirects === '/admin';
+        this.isAdminRoute = event.urlAfterRedirects.startsWith('/admin');
       }
     });
   }

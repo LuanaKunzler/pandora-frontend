@@ -26,7 +26,7 @@ export class AuthGuardService implements CanActivate {
           return false;
         } else if (
           authState.userRole.includes('ROLE_ADMIN') &&
-          state.url === '/admin'
+          state.url.startsWith('/admin')
         ) {
           // O usuário tem a role ROLE_ADMIN e está na rota /admin, permita o acesso
           return true;

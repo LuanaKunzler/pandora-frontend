@@ -1,41 +1,42 @@
 <mat-sidenav-container class="admin-sidenav-container" autosize>
   <mat-sidenav #sidenav class="admin-sidenav" mode="side" opened="true">
     <mat-nav-list>
-      <mat-list-item>
+      <mat-list-item routerLink="/admin/dashboard">
         Dashboard
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item routerLink="/admin/users">
         Usuários
       </mat-list-item>
       <mat-expansion-panel class="admin-sidenav-item" [class.mat-elevation-z0]="true">
         <mat-expansion-panel-header class="admin-expansion-panel-header">
-            <a mat-panel-title routerLink="#">Produtos</a>
+            <a mat-panel-title routerLink="/admin/products">Produtos</a>
         </mat-expansion-panel-header>
         <mat-nav-list>
-            <a mat-list-item routerLink="#">
+            <a mat-list-item routerLink="/admin/categories">
                 Categorias
             </a>
-            <a mat-list-item routerLink="#">
+            <a mat-list-item routerLink="/admin/authors">
                 Autores
-            </a>
-            <a mat-list-item routerLink="#">
-                Descontos
             </a>
         </mat-nav-list>
       </mat-expansion-panel>
-      <mat-list-item>
+      <mat-list-item routerLink="/admin/orders">
         Pedidos
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item routerLink="/admin/discounts">
         Descontos
       </mat-list-item>
-      <mat-list-item>
+      <mat-list-item routerLink="/admin/reports">
         Relatórios
       </mat-list-item>
-
+      <mat-list-item routerLink="/admin/configs">
+        Configurações
+      </mat-list-item>
       
     </mat-nav-list>
   </mat-sidenav>
 
-  <div class="admin-sidenav-content">Main content that resizes properly</div>
+  <div class="admin-sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
 </mat-sidenav-container>
