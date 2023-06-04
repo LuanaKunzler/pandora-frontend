@@ -2,7 +2,7 @@ import * as AuthorizationActions from './authorization.actions';
 import { HttpError } from '../app.reducers';
 
 export interface AuthorizationState {
-  userRole: string;
+  userRole: string[];
   userMode: boolean;
   authenticated: boolean;
   isActive: boolean;
@@ -12,7 +12,7 @@ export interface AuthorizationState {
 }
 
 const initialState: AuthorizationState = {
-  userRole: '',
+  userRole: [],
   userMode: false,
   authenticated: false,
   isActive: false,

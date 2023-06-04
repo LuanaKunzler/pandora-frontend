@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as AuthActions from './store/authorization/authorization.actions';
 import { Store } from '@ngrx/store';
 import * as fromApp from './store/app.reducers';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { NavigationEnd, Router, RouterStateSnapshot } from '@angular/router';
+import { filter, map, take } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -13,17 +13,19 @@ import { filter } from 'rxjs';
 export class AppComponent implements OnInit {
   isAdminRoute: boolean = false;
 
-  constructor(private store: Store<fromApp.AppState>, private router: Router, private activatedRoute: ActivatedRoute) {
-    this.router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.isAdminRoute = this.activatedRoute.snapshot.firstChild?.routeConfig?.path === 'admin';
-      });
+  constructor(private store: Store<fromApp.AppState>, private router: Router) {
   }
 
   ngOnInit(): void {
     this.store.dispatch(new AuthActions.CheckIfLoggedIn());
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isAdminRoute = event.urlAfterRedirects === '/admin';
+      }
+    });
   }
+
+  
 
   onActivate($event: any) {
     window.scroll(0, 0);

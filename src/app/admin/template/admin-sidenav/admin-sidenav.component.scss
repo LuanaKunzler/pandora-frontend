@@ -1,0 +1,39 @@
+.admin-sidenav-container {
+  height: 100%;
+  font-family: 'Roboto', sans-serif !important;
+}
+.admin-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.admin-sidenav {
+  margin-top: 64px;
+  user-select: none;
+}
+.full-width {
+  width: 100%;
+}
+.admin-sidenav-item {
+  border-bottom: none;
+  padding: 0;
+}
+.admin-expansion-panel-header a {
+  color: #333;
+  text-decoration: none;
+}
+.mat-expansion-panel-header {
+  padding: 0 16px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+
+.mat-expansion-panel,
+.mat-expansion-panel * {
+  font-family: 'Roboto', sans-serif !important;
+}

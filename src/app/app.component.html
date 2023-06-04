@@ -1,4 +1,9 @@
-<app-header *ngIf="!isAdminRoute"></app-header>
-<app-admin-header *ngIf="isAdminRoute"></app-admin-header>
-<router-outlet (activate)="onActivate($event)"></router-outlet>
-<app-footer></app-footer>
+<ng-container *ngIf="!isAdminRoute">
+  <app-header *ngIf="!isAdminRoute"></app-header>
+  <router-outlet (activate)="onActivate($event)"></router-outlet>
+  <app-footer></app-footer>
+</ng-container>
+
+<ng-container *ngIf="isAdminRoute">
+  <app-admin *ngIf="isAdminRoute"></app-admin>
+</ng-container>

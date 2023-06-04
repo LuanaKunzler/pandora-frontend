@@ -31,7 +31,7 @@ export class SetUserMode implements Action {
 
 export class UpdateUserRole implements Action {
   readonly type = UPDATE_USER_ROLE;
-  constructor(public payload: { userRole: string }) {}
+  constructor(public payload: { userRole: string[] }) {}
 }
 export class SignUp implements Action {
   readonly type = SIGN_UP;

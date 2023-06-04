@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import * as AuthorizationActions from '../../store/authorization/authorization.actions';
-import * as fromAuth from '../../store/authorization/authorization.reducer';
-import * as fromApp from '../../store/app.reducers';
-import { Observable, Subscription, take } from 'rxjs';
+import * as AuthorizationActions from '../../../store/authorization/authorization.actions';
+import * as fromAuth from '../../../store/authorization/authorization.reducer';
+import * as fromApp from '../../../store/app.reducers';
+import { Observable, take } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
-import { AuthorizationState } from '../../store/authorization/authorization.reducer';
+import { AuthorizationState } from '../../../store/authorization/authorization.reducer';
 
 @Component({
   selector: 'app-admin-header',
@@ -14,6 +14,7 @@ import { AuthorizationState } from '../../store/authorization/authorization.redu
 })
 export class AdminHeaderComponent implements OnInit {
 
+  isCollapsed = true;
   authorizationState: Observable<AuthorizationState> = new Observable<AuthorizationState>();
 
   constructor(private store: Store<fromApp.AppState>, public router: Router) {}

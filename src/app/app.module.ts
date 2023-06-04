@@ -36,15 +36,16 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../enviroments/enviroment';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { AdminModule } from './admin/admin.module';
-import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GPageNotFoundComponent,
-    AdminHeaderComponent
+    GPageNotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +66,11 @@ import { AdminHeaderComponent } from './admin/admin-header/admin-header.componen
     AngularFireModule.initializeApp(environment.firebase),
     NgbToastModule,
     AccordionModule.forRoot(),
-    AdminModule
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    AdminModule,
+    BrowserAnimationsModule
   ],
   providers: [BookService, CartService, OrderService, TokenService, AuthGuardService, NonAuthGuardService, AccountService,
     {
