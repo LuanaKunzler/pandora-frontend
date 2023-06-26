@@ -115,6 +115,45 @@ textarea.yellow:focus {
 .loader:after {
   left: 1.5em;
 }
+
+.loader-admin,
+.loader-admin:before,
+.loader-admin:after {
+  background: $purple;
+  -webkit-animation: load1 1s infinite ease-in-out;
+  animation: load1 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
+}
+.loader-admin {
+  color: $purple;
+  text-indent: -9999em;
+  font-size: 12px;
+  position: absolute;
+  left: 49%;
+  top: 50%;
+
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.loader-admin:before,
+.loader-admin:after {
+  position: absolute;
+  left: 50%;
+  content: "";
+}
+.loader-admin:before {
+  left: -1.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader-admin:after {
+  left: 1.5em;
+}
+
 @-webkit-keyframes load1 {
   0%,
   80%,

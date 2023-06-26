@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import * as AuthActions from './store/authorization/authorization.actions';
-import { Store } from '@ngrx/store';
+import * as fromAuth from '../../src/app/store/authorization/authorization.reducer';
+import { Store, select } from '@ngrx/store';
 import * as fromApp from './store/app.reducers';
 import { NavigationEnd, Router, RouterStateSnapshot } from '@angular/router';
-import { filter, map, take } from 'rxjs';
+import * as AuthActions from '../app/store/authorization/authorization.actions';
+import { AdminComponent } from './admin/admin.component';
+import { AppState } from './store/app.reducers';
 
 @Component({
   selector: 'app-root',
@@ -18,16 +20,18 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(new AuthActions.CheckIfLoggedIn());
-    this.router.events.subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        this.isAdminRoute = event.urlAfterRedirects.startsWith('/admin');
-      }
+    this.store.select((state: AppState) => state.authorization.isAdminRoute)
+    .subscribe(isAdminRoute => {
+      this.isAdminRoute = isAdminRoute;
     });
   }
 
-  
-
   onActivate($event: any) {
     window.scroll(0, 0);
+    if ($event instanceof AdminComponent) {
+      this.store.dispatch(new AuthActions.UpdateAdminRoute(true));
+    } else {
+      this.store.dispatch(new AuthActions.UpdateAdminRoute(false));
+    }
   }
 }

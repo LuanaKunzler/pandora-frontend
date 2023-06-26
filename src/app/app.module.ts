@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HeaderModule } from './header/header.module';
 import { HomeModule } from './home/home.module';
@@ -31,7 +31,7 @@ import { BrowseEffects } from './store/browse/browse.effects';
 import { VerificationModule } from './verification/verification.module';
 import { NonAuthGuardService } from './services/non-auth-guard.service';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import { GoogleLoginProvider, FacebookLoginProvider } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../enviroments/enviroment';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
@@ -41,6 +41,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AdminModule } from './admin/admin.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { AdminAuthGuard } from './services/admin-guard.service';
+import { UsersService } from './services/admin-services/users.service';
+import localePt from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -70,9 +77,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatIconModule,
     MatButtonModule,
     AdminModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSidenavModule
   ],
-  providers: [BookService, CartService, OrderService, TokenService, AuthGuardService, NonAuthGuardService, AccountService,
+  providers: [AdminAuthGuard, BookService, CartService, OrderService, TokenService, AuthGuardService, NonAuthGuardService, AccountService, UsersService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
@@ -84,15 +92,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         autoLogin: false,
         providers: [
           {
-            id: GoogleLoginProvider.PROVIDER_ID, // Provedor do Google
+            id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider('186730369443-t65ij8igqirdcrlrnp6hmtaq9u7bg77m.apps.googleusercontent.com')
-          },
-          {
-            id: FacebookLoginProvider.PROVIDER_ID, // Provedor do Facebook
-            provider: new FacebookLoginProvider('974004276834842')
           }
         ]
       } as SocialAuthServiceConfig,
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt-BR'
     }
   ],
   bootstrap: [AppComponent]

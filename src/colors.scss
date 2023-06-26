@@ -9,6 +9,7 @@ $border-gray: #e6e6e6;
 $white: #ffffff;
 $yellow: #ffc000;
 $zero: #000000;
+$purple: #673ab7;
 
 $colors: () !default;
 $colors: map_merge(
@@ -23,6 +24,7 @@ $colors: map_merge(
     "white": $white,
     "yellow": $yellow,
     "zero": $zero,
+    "purple": $purple
   ),
   $colors
 );

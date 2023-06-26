@@ -20,6 +20,7 @@ import {
 } from 'rxjs/operators';
 import { AuthorizationState } from './authorization.reducer';
 import { Store } from '@ngrx/store';
+import * as AuthActions from '../../store/authorization/authorization.actions';
 
 @Injectable()
 export class AuthEffects {
@@ -45,7 +46,7 @@ export class AuthEffects {
             credentials.passwordRepeat
           )
           .pipe(
-            switchMap((res) => {
+            switchMap((res) => {              
               return [
                 {
                   type: AuthorizationActions.SIGN_UP_SUCCESS,
@@ -113,7 +114,6 @@ export class AuthEffects {
         .pipe(take(1))
         .subscribe((authState: fromAuth.AuthorizationState) => {
           if (authState.authenticated) {
-            console.log('authState.userRole: ', authState.userRole);
             if (authState.userRole.includes('ROLE_ADMIN')) {
               this.router.navigate(['/admin']);
             } else {
@@ -171,7 +171,6 @@ export class AuthEffects {
         .pipe(take(1))
         .subscribe((authState: fromAuth.AuthorizationState) => {
           if (authState.authenticated) {
-            console.log('authState.userRole: ', authState.userRole);
             if (authState.userRole.includes('ROLE_ADMIN')) {
               this.router.navigate(['/admin']);
             } else {

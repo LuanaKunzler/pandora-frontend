@@ -8,17 +8,21 @@ export interface GoogleSignInRequest {
 }
 
 export interface User {
+    id: number;
     email: string;
-    firstName: string;
-    lastName: string;
-    address: string;
-    city: string;
-    state: string;
-    zip: string;
-    phone: string;
-    country: string;
+    password?: string;
+    firstName?: string;
+    lastName?: string;
+    address?: string;
+    city?: string;
+    state?: string;
+    zip?: string;
+    phone?: string;
+    country?: string;
     emailVerified: number;
-    role: string;
+    roles: any[];
+    enabled?: boolean;
+    socialProvider?: string;
   }
   
   export interface BookCategory {

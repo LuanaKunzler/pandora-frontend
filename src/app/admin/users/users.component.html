@@ -1,1 +1,45 @@
-<p>users works!</p>
+<button class="btn-users" color="primary" mat-raised-button routerLink="/admin/users/create">Novo</button>
+
+<app-user-read></app-user-read>
+
+<!-- <mat-card class="users mat-elevation-z3">
+  
+    <mat-card-title class="title">Usuários</mat-card-title>
+    <mat-table [dataSource]="users">
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.id }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef>NOME</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.firstName }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef>SOBRENOME</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.lastName }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef>EMAIL</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.email }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="permissoes">
+        <mat-header-cell *matHeaderCellDef>PERMISSÕES</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.role }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="verificado">
+        <mat-header-cell *matHeaderCellDef>VERIFICADO</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.emailVerified }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <mat-header-cell *matHeaderCellDef>STATUS</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.enabled }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="acoes">
+        <mat-header-cell *matHeaderCellDef>AÇÕES</mat-header-cell>
+        <mat-cell *matCellDef="let user">{{ user.enabled }}</mat-cell>
+      </ng-container>
+      
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table> 
+</mat-card>-->

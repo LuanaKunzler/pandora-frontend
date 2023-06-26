@@ -13,35 +13,17 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthGuardService implements CanActivate {
-  constructor(private store: Store<fromApp.AppState>, private router: Router) {}
+
+  constructor(private store: Store<fromApp.AppState>, private router: Router) {
+  }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return this.store.select('authorization').pipe(
-      take(1),
-      map((authState: fromAuth.AuthorizationState) => {
-        console.log('authGuard authState.role: ', authState.userRole);
-
+    return this.store.select('authorization')
+      .pipe(take(1), map((authState: fromAuth.AuthorizationState) => {
         if (!authState.authenticated) {
           this.router.navigate(['/login']);
-          return false;
-        } else if (
-          authState.userRole.includes('ROLE_ADMIN') &&
-          state.url.startsWith('/admin')
-        ) {
-          // O usuário tem a role ROLE_ADMIN e está na rota /admin, permita o acesso
-          return true;
-        } else if (
-          authState.userRole.includes('ROLE_USER') &&
-          state.url !== '/admin'
-        ) {
-          // O usuário tem a role ROLE_USER e não está na rota /admin, permita o acesso
-          return true;
-        } else {
-          // Para qualquer outro caso, redirecione de volta para a rota /admin
-          this.router.navigate(['/admin']);
-          return false;
         }
-      })
-    );
+        return authState.authenticated;
+      }));
   }
 }

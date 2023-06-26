@@ -3,5 +3,9 @@ export class ErrorMessage {
     public static readonly DUPLICATED_EMAIL = 'Já existe uma conta com este e-mail. Por favor, faça login.';
     public static readonly DEFAULT = 'Erro ao processar sua solicitação.';
     public static readonly SIGNUP_FAILURE = 'Falha ao fazer login.'
-  }
-  
+}
+
+export class SuccessMessage {
+  public static readonly USER_CREATED = 'Usuário criado com sucesso!';
+  public static readonly USER_UPDATED = 'Usuário atualizado com sucesso!';
+}

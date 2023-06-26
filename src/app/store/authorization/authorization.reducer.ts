@@ -9,6 +9,7 @@ export interface AuthorizationState {
   errors: Array<HttpError>;
   loading: boolean;
   provider?: string;
+  isAdminRoute: boolean;
 }
 
 const initialState: AuthorizationState = {
@@ -18,6 +19,7 @@ const initialState: AuthorizationState = {
   isActive: false,
   errors: [],
   loading: false,
+  isAdminRoute: false
 };
 
 export function authorizationReducer(
@@ -25,6 +27,11 @@ export function authorizationReducer(
   action: AuthorizationActions.AuthActions
 ) {
   switch (action.type) {
+    case AuthorizationActions.UPDATE_ADMIN_ROUTE:
+      return {
+        ...state,
+        isAdminRoute: action.payload
+      };
     case AuthorizationActions.UPDATE_USER_ROLE:
       return {
         ...state,

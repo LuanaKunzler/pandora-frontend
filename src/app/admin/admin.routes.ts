@@ -10,14 +10,18 @@ import { OrdersComponent } from './orders/orders.component';
 import { ReportsComponent } from './reports/reports.component';
 import { UsersComponent } from './users/users.component';
 import { ConfigsComponent } from './configs/configs.component';
+import { AdminAuthGuard } from '../services/admin-guard.service';
+import { UserCreateComponent } from './users/user-create/user-create.component';
+import { UserUpdateComponent } from './users/user-update/user-update.component';
 
-export const AdminRoutes: Routes = [
+const AdminRoutes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [AuthGuardService],
+    canActivate: [AdminAuthGuard],
+    canActivateChild: [AdminAuthGuard],
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: '', redirectTo: 'users', pathMatch: 'full' },
       { path: 'authors', component: AuthorsComponent },
       { path: 'categories', component: CategoriesComponent },
       { path: 'configs', component: ConfigsComponent },
@@ -27,6 +31,10 @@ export const AdminRoutes: Routes = [
       { path: 'products', component: ProductsComponent },
       { path: 'reports', component: ReportsComponent },
       { path: 'users', component: UsersComponent },
+      { path: 'users/create', component: UserCreateComponent },
+      { path: 'users/update/:id', component: UserUpdateComponent }
     ],
   },
 ];
+
+export default AdminRoutes;

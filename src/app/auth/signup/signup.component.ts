@@ -9,15 +9,10 @@ import * as PasswordValidators from '../../../utils//validators/password.validat
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
-import {
-  GoogleSignUpFailure,
-  GoogleSignUpSuccess,
-  SignUp,
-} from '../../store/authorization/authorization.actions';
-import { HttpError } from '../../store/app.reducers';
+import { GoogleSignUpFailure } from '../../store/authorization/authorization.actions';
 import { AccountService } from 'src/app/services/account.service';
 import { GoogleSignInRequest } from 'src/app/store/model';
-import { ErrorMessage } from 'src/app/common/error-message';
+import { ErrorMessage } from 'src/app/common/messages';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/services/token.service';
 import { MyHttpError } from 'src/app/common/myHttpError';
@@ -36,10 +31,7 @@ export class SignupComponent implements OnInit {
 
   constructor(
     private store: Store<fromApp.AppState>,
-    private afAuth: AngularFireAuth,
-    private accountService: AccountService,
-    private router: Router,
-    private tokenService: TokenService
+    private afAuth: AngularFireAuth
   ) {}
 
   ngOnInit() {

@@ -10,7 +10,7 @@ import {
   map,
   throwError
 } from 'rxjs';
-import { ErrorMessage } from '../common/error-message';
+import { ErrorMessage } from '../common/messages';
 import { TokenService } from './token.service';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../../../src/app/store/app.reducers';

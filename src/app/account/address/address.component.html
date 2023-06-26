@@ -9,9 +9,8 @@
       <button type="button" class="btn-close" aria-label="Fechar" (click)="errorAlertVisible = false"></button>
     </ngb-toast>
     
-    <ngb-toast [class]="'bg-success text-light'" *ngIf="successAlertVisible" [autohide]="true" [delay]="5000" (hidden)="successAlertVisible = false">      
+    <ngb-toast [class]="'bg-success text-light'" *ngIf="successAlertVisible" [autohide]="true" [delay]="3000" (hidden)="successAlertVisible = false">      
       Seu endereço foi atualizado com sucesso!
-      <button type="button" class="btn-close" aria-label="Fechar" (click)="successAlertVisible = false"></button>
     </ngb-toast> 
     
     <div *ngIf="!innerLoading">

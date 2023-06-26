@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import * as AuthorizationActions from '../../../store/authorization/authorization.actions';
 import * as fromAuth from '../../../store/authorization/authorization.reducer';
 import * as fromApp from '../../../store/app.reducers';
@@ -16,6 +16,7 @@ export class AdminHeaderComponent implements OnInit {
 
   isCollapsed = true;
   authorizationState: Observable<AuthorizationState> = new Observable<AuthorizationState>();
+  @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
 
   constructor(private store: Store<fromApp.AppState>, public router: Router) {}
   
@@ -35,6 +36,10 @@ export class AdminHeaderComponent implements OnInit {
           this.router.navigate(['/']);
         }
       });
+  }
+
+  toggleSidebar() {
+    this.toggleSidebarForMe.emit();
   }
 
   userSignOut() {

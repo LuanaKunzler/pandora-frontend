@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class ProductsComponent {
 
+  navegateToCreate(): void {
+    
+  }
 }

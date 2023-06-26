@@ -17,7 +17,7 @@ import {
 import { MyHttpError } from 'src/app/common/myHttpError';
 import { TokenService } from 'src/app/services/token.service';
 import { GoogleSignInRequest } from 'src/app/store/model';
-import { ErrorMessage } from 'src/app/common/error-message';
+import { ErrorMessage } from 'src/app/common/messages';
 
 @Component({
   selector: 'app-signin',

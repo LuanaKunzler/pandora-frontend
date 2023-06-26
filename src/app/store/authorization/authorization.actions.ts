@@ -4,6 +4,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import { GoogleSignInRequest } from '../model';
 
+export const UPDATE_ADMIN_ROUTE = 'UPDATE_ADMIN_ROUTE';
 export const UPDATE_USER_ROLE = 'UPDATE_USER_ROLE';
 export const SET_USER_MODE = 'SET_USER_MODE';
 export const SIGN_UP = 'SIGN_UP';
@@ -23,6 +24,12 @@ export const CHECK_IF_LOGGED_IN = 'CHECK_IF_LOGGED_IN';
 export const FETCH_VERIFICATION_STATUS = 'FETCH_VERIFICATION_STATUS';
 export const FETCH_VERIFICATION_STATUS_SUCCESS = 'FETCH_VERIFICATION_STATUS_SUCCESS';
 export const AUTH_ERROR = 'AUTH_ERROR';
+
+export class UpdateAdminRoute implements Action {
+  readonly type = UPDATE_ADMIN_ROUTE;
+
+  constructor(public payload: boolean) {}
+}
 
 export class SetUserMode implements Action {
   readonly type = SET_USER_MODE;
@@ -125,7 +132,7 @@ export class GoogleSignInFailure implements Action {
   constructor(public payload: HttpError) {}
 }
 
-export type AuthActions = UpdateUserRole | SetUserMode | SignUp | SignUpSuccess | SignUpFailure | GoogleSignUpSuccess | GoogleSignUpFailure | SignIn | SignInSuccess
+export type AuthActions = UpdateAdminRoute | UpdateUserRole | SetUserMode | SignUp | SignUpSuccess | SignUpFailure | GoogleSignUpSuccess | GoogleSignUpFailure | SignIn | SignInSuccess
   | SignOut | SignOutSuccess | CheckIfLoggedIn
   | FetchVerificationStatus | FetchVerificationStatusSuccess | GoogleSignInSuccess | GoogleSignInFailure | GoogleSignIn
   | AuthError;

@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../store/app.reducers';
 import * as fromAuth from '../store/authorization/authorization.reducer';
 import { map, take } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class NonAuthGuardService implements CanActivate {
